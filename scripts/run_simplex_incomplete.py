@@ -7,6 +7,7 @@ def run_incomplete_verification(gpu, cpus, experiment, epsilon):
         command = f"CUDA_VISIBLE_DEVICES={gpu} taskset -c {cpus} " \
                   f"python tools/bounding_tools/simplex_cifar_bound_comparison.py " \
                   f"--network_filename ./data/cifar_sgd_8px.pth --eps {epsilon} --target_directory ./results/sgd8_ll --from_intermediate_bounds"
+    """
     elif experiment == 'cifar_model_wide_l1':
         command = f"CUDA_VISIBLE_DEVICES={gpu} taskset -c {cpus} " \
                     f"python tools/bounding_tools/simplex_cifar_bound_comparison.py  --nn_name cifar_model_wide_l1 " \
@@ -23,7 +24,7 @@ def run_incomplete_verification(gpu, cpus, experiment, epsilon):
         command = f"CUDA_VISIBLE_DEVICES={gpu} taskset -c {cpus} " \
                   f"python tools/bounding_tools/simplex_mnist_bound_comparison.py " \
                   f"--network_filename ./data/cifar_sgd_8px.pth --eps 0.35 --target_directory ./results/mnist_l1_0.35 --from_intermediate_bounds"
-
+    """
     print(command)
     os.system(command)
 
@@ -68,6 +69,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Computing bounds
-    for experiment in ["cifar_sgd", "cifar_model_wide_l1", "cifar_model_deep_l1", "cifar_model_base_l1", "mnist_l1"]:
+    #for experiment in ["cifar_sgd", "cifar_model_wide_l1", "cifar_model_deep_l1", "cifar_model_base_l1", "mnist_l1"]:
+    for experiment in ["cifar_sgd"]:
         for epsilon in args.epsilon_list:
             run_incomplete_verification(args.gpu_id, args.cpus, experiment, epsilon)
