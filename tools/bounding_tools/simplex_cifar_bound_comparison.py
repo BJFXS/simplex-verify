@@ -62,7 +62,12 @@ def main():
 
     ft = open(os.path.join(results_dir, "ver_acc.txt"), "a")
 
-    _, test_loader = cifar_loaders(1)
+    #_, test_loader = cifar_loaders(1)
+    x_test, label = torch.load('data1.pth')
+    x_test = x_test.reshape(x_test.size(0), -1)  # flatten to [N, 784]
+    test_loader = list(zip(x_test, label))
+    print("Loaded data1.pth:", x_test.shape, label.shape)
+
     for idx, (X, y) in enumerate(test_loader):
         if (args.modulo is not None) and (idx % args.modulo != args.modulo_do):
             continue

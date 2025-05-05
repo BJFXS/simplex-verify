@@ -13,9 +13,26 @@ from plnn.network_linear_approximation import LinearizedNetwork
 
 import re
 
+import torch
+import torch.nn as nn
+def SimpleNNRelu():
+    return nn.Sequential(
+        nn.Linear(28*28, 128),
+        nn.ReLU(),
+        nn.Linear(128, 64),
+        nn.ReLU(),
+        nn.Linear(64, 10)
+    )
+
 def load_network(filename):
+    model = SimpleNNRelu()  # Match the saved model structure
+    state_dict = torch.load(filename)
+    model.load_state_dict(state_dict)
+    model.eval()
+    return model
+    """
     dump = torch.load(filename)
-    state_dict = dump['state_dict'][0]
+    state_dict = dum #['state_dict'][0]
     if len(state_dict) == 8:
         model = cifar_model()
     elif len(state_dict) == 14:
@@ -25,6 +42,7 @@ def load_network(filename):
     # [0] because it's the dumb cascade training, which we don't deal with
     model.load_state_dict(state_dict)
     return model
+    """
 
 
 def make_elided_models(model, return_error=False):
