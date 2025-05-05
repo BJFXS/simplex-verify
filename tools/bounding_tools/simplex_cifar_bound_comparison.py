@@ -37,6 +37,14 @@ def main():
 
     np.random.seed(0)
 
+    #import torch
+    #data = torch.load("./data/relu_model.pth")
+    #print(type(data))
+    #if isinstance(data, dict):
+    #    print(data.keys())
+    #else:
+    #    print("no data")
+
     model = load_network(args.network_filename)
     """
     model = SimpleNNRelu()
