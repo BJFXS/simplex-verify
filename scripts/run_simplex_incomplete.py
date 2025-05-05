@@ -6,7 +6,7 @@ def run_incomplete_verification(gpu, cpus, experiment, epsilon):
     if experiment == "cifar_sgd":
         command = f"CUDA_VISIBLE_DEVICES={gpu} taskset -c {cpus} " \
                   f"python tools/bounding_tools/simplex_cifar_bound_comparison.py " \
-                  f"--network_filename ./data/cifar_sgd_8px.pth --eps {epsilon} --target_directory ./results/sgd8_ll --from_intermediate_bounds"
+                  f"--network_filename ./data/relu_model.pth --eps {epsilon} --target_directory ./results/sgd8_ll --from_intermediate_bounds"
     """
     elif experiment == 'cifar_model_wide_l1':
         command = f"CUDA_VISIBLE_DEVICES={gpu} taskset -c {cpus} " \
